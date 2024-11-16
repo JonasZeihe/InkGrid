@@ -1,0 +1,30 @@
+InkGrid/
+├── .gitignore
+├── .git/
+├── .github/
+│   └── workflows/
+│       └── build.yml
+├── images/
+│   └── inkgrid_logo.png
+├── src/
+│   ├── inkgrid/
+│   │   ├── generate.py
+│   │   ├── gui.py
+│   │   └── utils.py
+│   ├── test_runners/
+│   │   └── run_all_tests.bat
+│   ├── tests/
+│   │   ├── __init__.py
+│   │   ├── conftest.py
+│   │   ├── test_generate.py
+│   │   ├── test_gui.py
+│   │   └── test_utils.py
+│   └── main.py
+├── color_palette_template.txt
+├── LICENSE
+├── README.md
+├── requirements.txt
+├── run_inkgrid.bat
+├── run_inkgrid_logging.bat
+├── setup.py
+└── test.md

@@ -1,0 +1,4 @@
+pytest==8.3.3
+svgwrite==1.4.3
+coverage>=6.4.1
+

@@ -1,0 +1,42 @@
+##############################################
+# Farbpalette für das App-Design
+#
+# Zweck dieser Datei:
+# Diese Datei dient dazu, Farbpaletten strukturiert und nachvollziehbar zu speichern.
+# Für jede Farbgruppe (z. B. Primary, Secondary) und Schattierung (z. B. 1, 2, 3) kann ein Hex-Farbwert angegeben werden.
+#
+# Vorgehensweise:
+# - Jede Gruppe sollte mit einem Namen versehen sein, gefolgt von einer Nummerierung, z.B., Primary 1, Primary 2, etc.
+# - Verwenden Sie die Struktur <Kategorie> <Nummer>: <Hexwert> für jeden Eintrag.
+# - Leere Zeilen dienen als Trenner, um die Zeilen in Reihen darzustellen.
+# - Zeilen, die mit # beginnen, werden als Kommentar ignoriert.
+#
+# Beispiel:
+# Primary 1: #C2B8FF
+# Primary 2: #A898FF
+# ...
+##############################################
+
+Primary 1: 
+Primary 2: 
+Primary 3 (Main): 
+Primary 4: 
+Primary 5 (Darker): 
+
+Secondary 1: 
+Secondary 2: 
+Secondary 3 (Main): 
+Secondary 4: 
+Secondary 5 (Darker): 
+
+Accent 1: 
+Accent 2: 
+Accent 3 (Main): 
+Accent 4: 
+Accent 5 (Darker): 
+
+Background 1: 
+Background 2: 
+Background 3 (Main): 
+Background 4: 
+Background 5 (Darker): 

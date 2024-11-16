@@ -1,149 +1,190 @@
-# InkGrid
+# **InkGrid**
 
 ![InkGrid Logo](./images/inkgrid_logo.png)  
 ![Python](https://img.shields.io/badge/python-3.x-blue.svg)  
 ![License](https://img.shields.io/badge/license-MIT-green.svg)  
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/yourusername/inkgrid)  
-![Platform](https://img.shields.io/badge/platform-windows%20|%20macos-lightgrey.svg)  
-![Color Management](https://img.shields.io/badge/color%20management-integrated-brightgreen.svg)  
-![AI-Aided Development](https://img.shields.io/badge/AI--aided%20development-practice--driven-orange.svg)
+![Platform](https://img.shields.io/badge/platform-windows%20|%20macOS-lightgrey.svg)  
+![Design Automation](https://img.shields.io/badge/design-automation-brightgreen.svg)  
 
-**InkGrid** is an open-source tool licensed under the MIT License, designed for automating the creation and management of customizable color swatches. InkGrid is perfect for designers and developers who frequently work with consistent color palettes and need a structured, reliable way to generate and store color references for projects.
+---
 
-It provides a straightforward approach for creating and organizing color grids that can be easily integrated into workflows.
+## **What is InkGrid?**
 
-## Key Features
+**InkGrid** is a lightweight and flexible tool designed to automate the creation of **structured SVG swatches** from text-based color templates. The resulting SVG files are optimized for modern design systems, providing organized and reusable outputs for developers and designers alike.
 
-- **Automated Swatch Generation**: Quickly create and save swatches based on input color data files.
-- **Color Grouping and Customization**: Automatically organize swatches by group for easier identification and retrieval.
-- **Drag-and-Drop Support**: Drag and drop files containing color definitions, and InkGrid will process and organize the colors instantly.
-- **Consistency and Reproducibility**: Ensure your color grids are consistently organized and saved in reusable formats.
+---
 
-## Example Project Structure
+## **Features**
 
-Here’s what a typical InkGrid project might look like:
+- **Automated SVG Swatches**: Create reusable color assets in seconds.  
+- **Light and Dark Theme Support**: Outputs are compatible with UI/UX design systems.  
+- **Dynamic Grouping**: Organize colors automatically based on your template.  
+- **Flexible Templates**: Define structured palettes in an intuitive format.  
+- **High-Quality Outputs**: Professional SVG files ready for direct integration.
 
+---
+
+## **Project Structure**
 ```
-inkgrid/
+InkGrid/
 ├── .gitignore
+├── .git/
+├── .github/
+│   └── workflows/
+│       └── build.yml
+├── images/
+│   └── inkgrid_logo.png
 ├── src/
 │   ├── inkgrid/
-│   │   ├── __init__.py
 │   │   ├── generate.py
+│   │   ├── gui.py
 │   │   └── utils.py
-├── tests/
-│   ├── __init__.py
-│   ├── test_generate.py
-│   └── test_utils.py
+│   ├── test_runners/
+│   │   └── run_all_tests.bat
+│   ├── tests/
+│   │   ├── __init__.py
+│   │   ├── conftest.py
+│   │   ├── test_generate.py
+│   │   ├── test_gui.py
+│   │   └── test_utils.py
+│   └── main.py
+├── color_palette_template.txt
 ├── LICENSE
 ├── README.md
 ├── requirements.txt
-└── setup.py
+├── run_inkgrid.bat
+├── run_inkgrid_logging.bat
+├── setup.py
+└── test.md
 ```
+---
 
-## Installation
+## **Getting Started**
 
-1. **Download InkGrid**: Visit the [GitHub Releases](https://github.com/yourusername/inkgrid/releases) page to download the latest version of InkGrid.
+### **Installation**
 
-2. **Setup**:
-   - Extract the downloaded archive to a directory of your choice.
-   - Ensure Python 3.x is installed. If not, download it from [python.org](https://www.python.org/).
-
-## Usage
-
-### Basic Usage
-
-To use InkGrid, run the main script from the command line or use the provided executables.
-
-1. **Running InkGrid**:
-
-   - Navigate to the directory containing `inkgrid.exe` or the Python script.
-   - Run the command, providing the path to a color definition file:
-     ```bash
-     python src/inkgrid/generate.py /path/to/colors.txt
-     ```
-
-2. **Custom Color Groups**:
-   - InkGrid can parse color files with color groups for enhanced organization:
-     ```bash
-     python src/inkgrid/generate.py /path/to/colors.txt --grouped
-     ```
-
-### Running from the Command Line
-
-- Open a terminal or command prompt in the directory where `inkgrid.exe` or `generate.py` is located:
-  ```cmd
-  cd path/to/inkgrid
-  ```
-
-  Run InkGrid:
-  ```bash
-  python src/inkgrid/generate.py /path/to/colors.txt          # For normal execution
-  python src/inkgrid/generate.py /path/to/colors.txt --grouped # With grouped option
-  ```
-
-## Development
-
-If you’re interested in contributing to InkGrid or modifying it for your own needs, follow these steps to set up a development environment:
-
-1. **Clone the Repository**:
-
+1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/inkgrid.git
+   git clone https://github.com/jonaszeihe/inkgrid.git
    cd inkgrid
    ```
 
-2. **Create a Virtual Environment**:
+2. Install dependencies:  
+   ```bash
+   pip install -r requirements.txt
+   ```
 
+3. Run InkGrid with your template:  
+   ```bash
+   python src/main.py templates/sample_colors.txt
+   ```
+
+---
+
+## **Template Format**
+
+InkGrid uses a simple text-based template format for defining color palettes. This format ensures flexibility and allows for clear organization. Below is the exact structure of a sample template:
+
+### **Example Template** (`templates/sample_colors.txt`):
+
+```plaintext
+##############################################
+# Color Palette Template for InkGrid
+#
+# Define structured color palettes for automated SVG generation.
+# Format: <Category> <Number>: <HexValue>
+##############################################
+
+Primary 1:
+Primary 2:
+Primary 3 (Main):
+Primary 4:
+Primary 5 (Darker):
+
+Secondary 1:
+Secondary 2:
+Secondary 3 (Main):
+Secondary 4:
+Secondary 5 (Darker):
+
+Accent 1:
+Accent 2:
+Accent 3 (Main):
+Accent 4:
+Accent 5 (Darker):
+
+Background 1:
+Background 2:
+Background 3 (Main):
+Background 4:
+Background 5 (Darker):
+```
+
+### **How It Works**
+
+- **Categories** (e.g., `Primary`, `Secondary`) define logical groupings.  
+- **Numbering** helps distinguish variations of a color within a category.  
+- **Optional Descriptions** (e.g., `Main`, `Darker`) provide further clarity.  
+
+You can leave fields empty to serve as placeholders or fill them with HEX color values.
+
+---
+
+## **Output**
+
+InkGrid generates a single SVG file containing:  
+
+- **Dual Themes**: Organized sections for light and dark modes.  
+- **Grouped Swatches**: Clearly labeled categories based on your template.  
+- **Professional Formats**: SVG outputs ready for integration into any design system.
+
+### **Example Output**  
+- Your File: `colors.svg`  
+- Structure:
+  - Light theme colors.
+  - Dark theme colors.  
+  - Grouped by categories and ordered as per the template.
+  
+![Color Palette](./images/colors.png)  
+
+---
+
+## **For Developers**
+
+### **Set Up Environment**
+
+1. Create a virtual environment:  
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Install Development Dependencies**:
-
+2. Run tests:  
    ```bash
-   pip install -r requirements.txt
+   pytest tests/
    ```
 
-4. **Run InkGrid in Development Mode**:
-
+3. Build an executable (optional):  
    ```bash
-   python src/inkgrid/generate.py /path/to/colors.txt
+   pyinstaller --name InkGrid --onefile src/main.py
    ```
-
-5. **Build the Executable**:
-   To build a standalone executable using PyInstaller:
-   ```bash
-   pyinstaller --name inkgrid --onefile --specpath src --noconfirm src/inkgrid/generate.py
-   ```
-   The executable will be in the `dist/` folder.
-
-## AI-Aided Development
-
-InkGrid was developed with AI-aided best practices, ensuring a clean and efficient codebase. It simplifies the creation and management of color swatches, providing a high standard of organization and reproducibility.
-
-## Reporting Issues
-
-If you encounter any bugs or issues while using InkGrid, please report them by [creating an issue](https://github.com/yourusername/inkgrid/issues) on GitHub.
-
-## License
-
-InkGrid is licensed under the MIT License. For more details, please see the [LICENSE](./LICENSE) file.
 
 ---
 
-InkGrid automates the process of creating and managing color swatches, saving time and improving consistency for designers and developers alike.
+## **License**
 
-## Tags
+InkGrid is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for full details.
 
-- **Color Swatch Generation**
-- **Design Tool**
-- **Automation**
-- **Python Tool**
-- **Cross-Platform**
-- **AI-Aided Development**
-- **Open Source**
-- **MIT License**
-- **Developer Tools**
-- **Efficiency**
+---
+
+## **About**
+
+- **Author**: Jonas Zeihe  
+- **Contact**: JonasZeihe@gmail.com  
+- **GitHub**: [https://github.com/jonaszeihe/inkgrid](https://github.com/jonaszeihe/inkgrid)
+
+---
+
+## **Support the Project**
+
+If you find **InkGrid** useful, consider giving it a ⭐ on GitHub. Contributions are also welcome—open an issue or submit a pull request to help improve the project.
