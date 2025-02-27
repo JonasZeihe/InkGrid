@@ -15,15 +15,16 @@ def read_color_file(file_path):
     """
     colors = []
     try:
-        with open(file_path, 'r') as file:
-            for line in file:
+        with open(file_path, "r") as f:
+            for line in f:
                 line = line.strip()
                 if not line or line.startswith("#"):
                     continue
                 if ":" in line:
                     group, color = line.split(":", 1)
-                    group, color = group.strip(), color.strip()
-                    if re.match(r'^#[0-9A-Fa-f]{6}$', color):  # Validates hex color format
+                    group = group.strip()
+                    color = color.strip()
+                    if re.match(r"^#[0-9A-Fa-f]{6}$", color):
                         colors.append((group, color))
         return colors
     except FileNotFoundError:
@@ -40,4 +41,4 @@ def sanitize_id(text):
     Returns:
         str: Sanitized text.
     """
-    return re.sub(r'\W+', '_', text)
+    return re.sub(r"\W+", "_", text)
