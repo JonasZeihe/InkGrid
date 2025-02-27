@@ -1,0 +1,56 @@
+Primary 1: #FAFFFD
+Primary 2: #F2FAF7
+Primary 3: #A4DBC4
+Primary 4 (Main): #2ECC71
+Primary 5: #3B7C65
+Primary 6: #1A332A
+Primary 7 (Darker): #0F2118
+
+Secondary 1: #F9FEFE
+Secondary 2: #F3F9FA
+Secondary 3: #C0E1E5
+Secondary 4 (Main): #63B4BF
+Secondary 5: #38767F
+Secondary 6: #193130
+Secondary 7 (Darker): #0E1A1C
+
+Accent 1: #FFF8F3
+Accent 2: #FFE3E6
+Accent 3: #FFB3B6
+Accent 4 (Main): #FF9340
+Accent 5: #B52835
+Accent 6: #3F240F
+Accent 7 (Darker): #251409
+
+Highlight 1: #FFFDF8
+Highlight 2: #FFF5E6
+Highlight 3: #FFE1B3
+Highlight 4 (Main): #F5B041
+Highlight 5: #C99033
+Highlight 6: #996B26
+Highlight 7 (Darker): #5C4015
+
+Secondary Highlight 1: #FEF9F9
+Secondary Highlight 2: #FDEEEF
+Secondary Highlight 3: #F7CACE
+Secondary Highlight 4 (Main): #C88389
+Secondary Highlight 5: #9A666A
+Secondary Highlight 6: #6F4A4D
+Secondary Highlight 7 (Darker): #3F2A2C
+
+Neutral 1: #FFFFFF
+Neutral 2: #F2F5F5
+Neutral 3: #CCD7D8
+Neutral 4 (Main): #AAB7B8
+Neutral 5: #889394
+Neutral 6: #656D6E
+Neutral 7: #000000
+Neutral 8 (Darker): #242727
+
+Depth 1: #F9FAFA
+Depth 2: #E6EAEA
+Depth 3: #B0B7C0
+Depth 4 (Main): #2C3E50
+Depth 5: #1E2B3C
+Depth 6: #131D28
+Depth 7 (Darker): #0B1118

@@ -1,0 +1,27 @@
+##############################################
+# Farbpalette für das *Mirror's Edge*-Design
+##############################################
+
+Primary 1: #FFFFFF
+Primary 2: #F2F2F2
+Primary 3 (Main): #FF0000
+Primary 4: #CC0000
+Primary 5 (Darker): #990000
+
+Secondary 1: #A9A9A9
+Secondary 2: #666666
+Secondary 3 (Main): #333333
+Secondary 4: #000000
+Secondary 5 (Darker): #1A1A1A
+
+Accent 1: #66CCFF
+Accent 2: #3399FF
+Accent 3 (Main): #0066CC
+Accent 4: #004080
+Accent 5 (Darker): #002040
+
+Background 1: #F2F2F2
+Background 2: #E0E0E0
+Background 3 (Main): #D0D0D0
+Background 4: #B0B0B0
+Background 5 (Darker): #808080
