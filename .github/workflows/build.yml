@@ -82,7 +82,7 @@ jobs:
           path: dist/InkGrid_*
 
   release:
-    needs: build
+    needs: build<yx<yx
     runs-on: ubuntu-latest
     steps:
       - name: Download Windows artifact
