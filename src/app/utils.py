@@ -1,17 +1,14 @@
-# src/inkgrid/utils.py
+"""
+Utility functions for InkGrid. Handles reading color files and sanitizing IDs.
+"""
 
 import re
 
+
 def read_color_file(file_path):
     """
-    Reads colors from a file. Each line should contain a color in hex format,
-    with an optional group name separated by a colon.
-
-    Args:
-        file_path (str): Path to the input color file.
-
-    Returns:
-        list of tuple: List of (group, color) tuples.
+    Reads colors from a file. Each line can have 'GroupName: #RRGGBB'.
+    Returns a list of (group, color) tuples.
     """
     colors = []
     try:
@@ -26,19 +23,13 @@ def read_color_file(file_path):
                     color = color.strip()
                     if re.match(r"^#[0-9A-Fa-f]{6}$", color):
                         colors.append((group, color))
-        return colors
     except FileNotFoundError:
         print(f"Error: File {file_path} not found.")
-        return []
+    return colors
+
 
 def sanitize_id(text):
     """
-    Sanitizes a text to make it suitable for use as an ID.
-
-    Args:
-        text (str): The text to sanitize.
-
-    Returns:
-        str: Sanitized text.
+    Replaces non-alphanumeric characters with underscores for safe SVG usage.
     """
     return re.sub(r"\W+", "_", text)
