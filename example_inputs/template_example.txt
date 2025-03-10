@@ -1,0 +1,55 @@
+##############################################
+# Farbpalette für das App-Design
+#
+# Zweck dieser Datei:
+# Diese Datei dient dazu, Farbpaletten strukturiert und nachvollziehbar zu speichern.
+# Für jede Farbgruppe (z. B. Primary, Secondary) und Schattierung (z. B. 1, 2, 3) kann ein Hex-Farbwert angegeben werden.
+#
+# Vorgehensweise:
+# - Jede Gruppe sollte mit einem Namen versehen sein, gefolgt von einer Nummerierung, z.B., Primary 1, Primary 2, etc.
+# - Verwenden Sie die Struktur <Kategorie> <Nummer>: <Hexwert> für jeden Eintrag.
+# - Leere Zeilen dienen als Trenner, um die Zeilen in Reihen darzustellen.
+# - Zeilen, die mit # beginnen, werden als Kommentar ignoriert.
+#
+# Beispiel:
+# Primary 1: #C2B8FF
+# Primary 2: #A898FF
+# ...
+##############################################
+
+Primary 1: #CCD1FF
+Primary 2: #8A95FD
+Primary 3 (Main): #3441F9
+Primary 4: #1F2CCB
+Primary 5 (Darker): #0F197A
+
+Secondary 1: #FFC3A1
+Secondary 2: #FF9D6A
+Secondary 3 (Main): #FD7A26
+Secondary 4: #D35D10
+Secondary 5 (Darker): #9A3C06
+
+Accent 1: #C9F4F6
+Accent 2: #B1E8EC
+Accent 3 (Main): #9FDFE4
+Accent 4: #7AC4CB
+Accent 5 (Darker): #509196
+
+Secondary Accent 1: #FFF2D1
+Secondary Accent 2: #FAE6B2
+Secondary Accent 3 (Main): #F5E2A4
+Secondary Accent 4: #D7BF85
+Secondary Accent 5 (Darker): #B49D6B
+
+Background 1: #D3D5F8
+Background 2: #B5BAF1
+Background 3 (Main): #999EF6
+Background 4: #6D72C6
+Background 5 (Darker): #45488B
+
+Neutral 1 (White): #FFFFFF
+Neutral 2 (Light Gray): #E0E0E0
+Neutral 3 (Gray): #B3B3B3
+Neutral 4 (Dark Gray): #808080
+Neutral 5 (Darker Gray): #4D4D4D
+Neutral 6 (Black): #000000
