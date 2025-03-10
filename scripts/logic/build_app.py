@@ -2,7 +2,7 @@
 # (C) 2025 Jonas Zeihe, MIT License. Developer: Jonas Zeihe. Contact: JonasZeihe@gmail.com
 
 """
-Build script for creating a standalone executable of the InkGrid application
+Build script for creating a standalone executable of the application
 via PyInstaller or similar tools.
 """
 
@@ -30,10 +30,22 @@ def main():
     if os.path.isdir(build_path):
         _rmdir(build_path)
 
-    print("Building InkGrid with PyInstaller...")
-    _run_in_venv(
-        ["pyinstaller", "--onefile", "--name", "InkGrid", "--clean", "src/app/main.py"]
-    )
+    image_path = os.path.join(root, "images", "background.png")
+    pyinstaller_cmd = [
+        "pyinstaller",
+        "--onefile",
+        "--name",
+        "Application",
+        "--clean",
+        "--noconsole",
+        "src/app/main.py",
+    ]
+
+    if os.path.exists(image_path):
+        pyinstaller_cmd.append(f'--add-data="{image_path}{os.pathsep}images"')
+
+    print("Building with PyInstaller...")
+    _run_in_venv(pyinstaller_cmd)
 
     print("Build complete. Executable is in 'dist' folder.")
 
