@@ -62,7 +62,7 @@ jobs:
         shell: pwsh
         run: |
           $currentDate = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-          pyinstaller --onefile --name "InkGrid_$($currentDate)" src/main.py
+          pyinstaller --onefile --noupx --clean --name "InkGrid_$($currentDate)" src/main.py
       - name: Build executable with timestamp (macOS)
         if: matrix.os == 'macos-latest'
         run: |
