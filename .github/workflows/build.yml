@@ -73,27 +73,29 @@ jobs:
         shell: pwsh
         run: |
           $currentDate = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-          pyinstaller --onefile --noupx --clean --name "InkGrid_$($currentDate)" src/app/main.py
+          pyinstaller --onefile --name "InkGrid_$($currentDate).exe" src/app/main.py
+          Move-Item "dist\InkGrid_$($currentDate).exe" "dist\InkGrid_Windows_$($currentDate).exe"
 
       - name: Build executable with timestamp (macOS)
         if: matrix.os == 'macos-latest'
         run: |
           currentDate=$(date +"%Y-%m-%d_%H-%M-%S")
           pyinstaller --onefile --name "InkGrid_$currentDate" src/app/main.py
+          mv "dist/InkGrid_$currentDate" "dist/InkGrid_macOS_$currentDate"
 
       - name: Upload Windows artifact
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: inkgrid-exe
-          path: dist/InkGrid_*.exe
+          name: inkgrid-windows
+          path: dist/InkGrid_Windows_*.exe
 
       - name: Upload macOS artifact
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: inkgrid-app
-          path: dist/InkGrid_*
+          name: inkgrid-macos
+          path: dist/InkGrid_macOS_*
 
   release:
     needs: build
@@ -102,21 +104,21 @@ jobs:
       - name: Download Windows artifact
         uses: actions/download-artifact@v4
         with:
-          name: inkgrid-exe
-          path: .
+          name: inkgrid-windows
+          path: dist/
 
       - name: Download macOS artifact
         uses: actions/download-artifact@v4
         with:
-          name: inkgrid-app
-          path: .
+          name: inkgrid-macos
+          path: dist/
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            InkGrid_*.exe
-            InkGrid_*
+            dist/InkGrid_Windows_*.exe
+            dist/InkGrid_macOS_*
           tag_name: "v${{ github.run_id }}-${{ github.run_number }}"
           name: "Release ${{ github.run_id }}-${{ github.run_number }}"
           body: "Automated release of InkGrid version ${{ github.run_id }}-${{ github.run_number }}"
