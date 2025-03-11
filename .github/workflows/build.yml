@@ -39,7 +39,7 @@ jobs:
 
       - name: Run Tests
         env:
-          PYTHONPATH: ${{ github.workspace }}/src
+          PYTHONPATH: ${{ github.workspace }}
         run: pytest src/tests/
 
   build:
@@ -73,28 +73,35 @@ jobs:
         shell: pwsh
         run: |
           $currentDate = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-          pyinstaller --onefile --name "InkGrid_$($currentDate).exe" src/app/main.py
-          Move-Item "dist\InkGrid_$($currentDate).exe" "dist\InkGrid_Windows_$($currentDate).exe"
+          pyinstaller --onefile --noconsole --noupx --clean `
+            --hidden-import=PIL `
+            --hidden-import=PIL.Image `
+            --hidden-import=PIL.ImageTk `
+            --name "InkGrid_Windows_$($currentDate).exe" src/app/main.py
+          Move-Item "dist\InkGrid_Windows_$($currentDate).exe" "dist\InkGrid_Windows_$($currentDate).exe"
 
       - name: Build executable with timestamp (macOS)
         if: matrix.os == 'macos-latest'
         run: |
           currentDate=$(date +"%Y-%m-%d_%H-%M-%S")
-          pyinstaller --onefile --name "InkGrid_$currentDate" src/app/main.py
-          mv "dist/InkGrid_$currentDate" "dist/InkGrid_macOS_$currentDate"
+          pyinstaller --onefile --noconsole --clean \
+            --hidden-import=PIL \
+            --hidden-import=PIL.Image \
+            --hidden-import=PIL.ImageTk \
+            --name "InkGrid_macOS_$currentDate" src/app/main.py
 
       - name: Upload Windows artifact
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: inkgrid-windows
+          name: inkgrid-exe
           path: dist/InkGrid_Windows_*.exe
 
       - name: Upload macOS artifact
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: inkgrid-macos
+          name: inkgrid-app
           path: dist/InkGrid_macOS_*
 
   release:
@@ -104,21 +111,21 @@ jobs:
       - name: Download Windows artifact
         uses: actions/download-artifact@v4
         with:
-          name: inkgrid-windows
-          path: dist/
+          name: inkgrid-exe
+          path: .
 
       - name: Download macOS artifact
         uses: actions/download-artifact@v4
         with:
-          name: inkgrid-macos
-          path: dist/
+          name: inkgrid-app
+          path: .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            dist/InkGrid_Windows_*.exe
-            dist/InkGrid_macOS_*
+            InkGrid_Windows_*.exe
+            InkGrid_macOS_*
           tag_name: "v${{ github.run_id }}-${{ github.run_number }}"
           name: "Release ${{ github.run_id }}-${{ github.run_number }}"
           body: "Automated release of InkGrid version ${{ github.run_id }}-${{ github.run_number }}"
