@@ -36,13 +36,14 @@ def main():
         "--onefile",
         "--name",
         "Application",
-        "--clean",
-        "--noconsole",
         "src/app/main.py",
     ]
 
     if os.path.exists(image_path):
-        pyinstaller_cmd.append(f'--add-data="{image_path}{os.pathsep}images"')
+        if os.name == "nt":
+            pyinstaller_cmd.append(f"--add-data={image_path};images")
+        else:
+            pyinstaller_cmd.append(f"--add-data={image_path}:images")
 
     print("Building with PyInstaller...")
     _run_in_venv(pyinstaller_cmd)
