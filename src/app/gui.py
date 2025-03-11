@@ -10,7 +10,7 @@ from datetime import datetime
 import tkinter as tk
 from tkinter import filedialog, ttk, messagebox
 from PIL import Image, ImageTk
-from app.generate import generate_svg
+from app.generate import generate_svg_from_groups
 from app.utils import read_color_file
 from app.logger_config import setup_logger
 
@@ -140,7 +140,7 @@ def _generate(root, file_var, folder_var, logging_enabled, logger):
         svg_path = os.path.join(out_dir, svg_name)
 
         logger.info(f"Generating SVG: {svg_path}")
-        generate_svg(colors, path, output_file=svg_path)
+        generate_svg_from_groups(colors, path, output_file=svg_path)
         logger.info(f"SVG saved: {svg_path}")
 
     logger.info("All SVGs generated successfully.")
