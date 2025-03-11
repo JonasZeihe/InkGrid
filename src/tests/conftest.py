@@ -1,12 +1,11 @@
-# tests/conftest.py
-
-import pytest
+# src/tests/conftest.py
+"""
+Fügt das src-Verzeichnis dem sys.path hinzu, damit der Package-Import (app.*)
+funktioniert.
+"""
 import os
+import sys
 
-@pytest.fixture(scope="module", autouse=True)
-def setup_test_data():
-    os.makedirs("tests/data", exist_ok=True)
-    with open("tests/data/valid_colors.txt", "w") as f:
-        f.write("Primary: #FF5733\nSecondary: #33FF57\nTertiary: #3357FF\n")
-    with open("tests/data/with_comments.txt", "w") as f:
-        f.write("# This is a comment\nPrimary: #FF5733\n# Another comment\nSecondary: #33FF57\n")
+src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)

@@ -1,18 +1,37 @@
-# tests/test_gui.py
+import os
+import sys
+import pytest
+import tkinter as tk
+from app.gui import _resolve_image_path, _get_default_directory, _get_font
 
-from unittest.mock import patch
-from inkgrid.gui import select_color_file
 
-@patch("tkinter.filedialog.askopenfilename")
-def test_select_color_file(mock_askopenfilename):
-    # Simulate selecting a file
-    mock_askopenfilename.return_value = "test_colors.txt"
-    file_path = select_color_file()
-    assert file_path == "test_colors.txt"
+def test_resolve_image_path(tmp_path, monkeypatch):
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    (images_dir / "background.png").write_text("dummy content")
 
-@patch("tkinter.filedialog.askopenfilename")
-def test_select_color_file_cancel(mock_askopenfilename):
-    # Simulate cancelling the file dialog
-    mock_askopenfilename.return_value = ""
-    file_path = select_color_file()
-    assert file_path is None
+    monkeypatch.setattr(sys, "_MEIPASS", str(tmp_path), raising=False)
+
+    result = _resolve_image_path("background.png")
+    assert result is not None and os.path.basename(result) == "background.png"
+
+
+def test_get_default_directory():
+    assert os.path.exists(_get_default_directory())
+
+
+def test_get_font():
+    assert isinstance(_get_font(), tuple)
+    assert isinstance(_get_font(bold=True), tuple)
+
+
+@pytest.fixture
+def gui_root():
+    root = tk.Tk()
+    root.withdraw()
+    yield root
+    root.quit()
+
+
+def test_tkinter_root(gui_root):
+    assert isinstance(gui_root, tk.Tk)

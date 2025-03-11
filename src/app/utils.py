@@ -39,4 +39,6 @@ def sanitize_id(text):
     """
     Replaces non-alphanumeric characters with underscores for safe SVG usage.
     """
-    return re.sub(r"\W+", "_", text)
+    import re
+
+    return re.sub(r"\W+", "_", text).strip("_")

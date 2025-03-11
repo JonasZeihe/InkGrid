@@ -20,7 +20,6 @@ def run_app(logging_enabled=False):
     Starts the InkGrid GUI and allows the user to select files and an output directory.
     Returns the selected output directory.
     """
-    # Do not change the working directory globally; resources are resolved via sys._MEIPASS.
     root = tk.Tk()
     root.title("InkGrid - SVG Generator")
     root.geometry("720x520")
@@ -197,7 +196,7 @@ def _get_background_image():
 
 def _resolve_image_path(filename):
     base_dir = (
-        os.path.join(sys._MEIPASS, "images")
+        os.path.join(getattr(sys, "_MEIPASS", ""), "images")
         if getattr(sys, "frozen", False)
         else os.path.abspath(
             os.path.join(os.path.dirname(__file__), "..", "..", "images")
