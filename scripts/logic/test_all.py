@@ -14,68 +14,57 @@ def main():
     root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
     os.chdir(root)
 
-    if not os.path.isdir("venv"):
+    os.environ["PYTHONPATH"] = os.path.join(root, "src")
+
+    venv_python = get_venv_python()
+
+    if not os.path.exists(venv_python):
         print("No virtual environment found. Please initialize the project first.")
         input("Press Enter to exit...")
         sys.exit(1)
 
-    _ensure_coverage_installed()
+    _ensure_coverage_installed(venv_python)
     print("Running tests with coverage...")
+
     _run_in_venv(
-        [
-            "coverage",
-            "run",
-            "--source=app",
-            "-m",
-            "unittest",
-            "discover",
-            "-s",
-            "src/tests",
-            "-p",
-            "test_*.py",
-        ]
+        venv_python, ["coverage", "run", "--source=app", "-m", "pytest", "src/tests"]
     )
-    _run_in_venv(["coverage", "report", "-m"])
+    _run_in_venv(venv_python, ["coverage", "report", "-m"])
 
     print()
     print("Tests completed. Press Enter to exit...")
     input()
 
 
-def _ensure_coverage_installed():
+def get_venv_python():
     if os.name == "nt":
-        act = os.path.join("venv", "Scripts", "activate.bat")
-        show_cmd = f'call "{act}" && python -m pip show coverage'
-        result = subprocess.run(show_cmd, shell=True, capture_output=True, text=True)
+        return os.path.join("venv", "Scripts", "python.exe")
+    else:
+        return os.path.join("venv", "bin", "python")
+
+
+def _ensure_coverage_installed(python_exe):
+    try:
+        result = subprocess.run(
+            [python_exe, "-m", "pip", "show", "coverage"],
+            capture_output=True,
+            text=True,
+            check=True,
+            env=os.environ,
+        )
         if "Name: coverage" not in result.stdout:
-            _install_coverage(activate_bat=act)
-    else:
-        act = "./venv/bin/activate"
-        show_cmd = f'. "{act}" && python -m pip show coverage'
-        result = subprocess.run(show_cmd, shell=True, capture_output=True, text=True)
-        if "Name: coverage" not in result.stdout:
-            _install_coverage(activate_sh=act)
+            raise Exception("Coverage not found")
+    except Exception:
+        print("Coverage not found. Installing...")
+        subprocess.run(
+            [python_exe, "-m", "pip", "install", "coverage"], check=True, env=os.environ
+        )
 
 
-def _install_coverage(activate_bat=None, activate_sh=None):
-    print("Coverage not found. Installing...")
-    if activate_bat:
-        cmd = f'call "{activate_bat}" && python -m pip install coverage'
-    else:
-        cmd = f'. "{activate_sh}" && python -m pip install coverage'
-    subprocess.run(cmd, shell=True, check=True)
-
-
-def _run_in_venv(cmd):
-    if os.name == "nt":
-        act = os.path.join("venv", "Scripts", "activate.bat")
-        full_cmd = f'call "{act}" && ' + " ".join(cmd)
-        subprocess.run(full_cmd, shell=True, check=True)
-    else:
-        act = "./venv/bin/activate"
-        joined = " ".join(cmd)
-        full_cmd = f'. "{act}" && {joined}'
-        subprocess.run(full_cmd, shell=True, check=True)
+def _run_in_venv(python_exe, cmd_args):
+    # Baue den Befehl: python -m <cmd_args...>
+    full_cmd = [python_exe, "-m"] + cmd_args
+    subprocess.run(full_cmd, check=True, env=os.environ)
 
 
 if __name__ == "__main__":

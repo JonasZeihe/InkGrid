@@ -4,3 +4,4 @@ REM (C) 2025 Jonas Zeihe, MIT License. Developer: Jonas Zeihe. Contact: JonasZei
 cd /d %~dp0
 cd ..\..
 python scripts\logic\test_all.py
+pause
