@@ -46,10 +46,10 @@ def test_resolve_image_path(tmp_path, monkeypatch):
     """
     images_dir = tmp_path / "images"
     images_dir.mkdir()
-    (images_dir / "background.png").write_text("dummy content")
+    (images_dir / "background.jpeg").write_text("dummy content")
     monkeypatch.setattr(sys, "_MEIPASS", str(tmp_path), raising=False)
-    result = _resolve_image_path("background.png")
-    assert result is not None and os.path.basename(result) == "background.png"
+    result = _resolve_image_path("background.jpeg")
+    assert result is not None and os.path.basename(result) == "background.jpeg"
 
 
 def test_get_default_directory():
@@ -174,7 +174,7 @@ def test_get_background_image(monkeypatch):
 
     root = tk.Tk()
     root.withdraw()
-    temp_img_path = os.path.join(os.getcwd(), "temp_background.png")
+    temp_img_path = os.path.join(os.getcwd(), "temp_background.jpeg")
     img = Image.new("RGB", (720, 520), (0, 128, 255))
     img.save(temp_img_path)
     monkeypatch.setattr("app.gui._resolve_image_path", lambda filename: temp_img_path)

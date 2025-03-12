@@ -28,7 +28,7 @@ def main():
     _rmdir(dist_path)
     _rmdir(build_path)
 
-    image_path = os.path.join(root, "images", "background.png")
+    image_path = os.path.join(root, "images", "background.jpeg")
     pyinstaller_cmd = [
         "pyinstaller",
         "--onefile",
