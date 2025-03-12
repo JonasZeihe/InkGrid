@@ -185,7 +185,7 @@ def _apply_theme(root):
 
 
 def _get_background_image():
-    image_path = _resolve_image_path("background.png")
+    image_path = _resolve_image_path("background.jpeg")
     if not image_path:
         return None
     img = Image.open(image_path).convert("RGBA")

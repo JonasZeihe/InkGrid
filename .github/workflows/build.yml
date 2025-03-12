@@ -75,7 +75,7 @@ jobs:
           $currentDate = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
           echo "Building Windows Executable..."
           pyinstaller --onefile --name "InkGrid_Windows_$($currentDate)" `
-            --add-data "images\background.png;images" `
+            --add-data "images\background.jpeg;images" `
             --hidden-import=PIL `
             --hidden-import=PIL.Image `
             --hidden-import=PIL.ImageTk `
@@ -87,7 +87,7 @@ jobs:
           currentDate=$(date +"%Y-%m-%d_%H-%M-%S")
           echo "Building macOS Executable..."
           pyinstaller --onefile --name "InkGrid_macOS_$currentDate" \
-            --add-data "images/background.png:images" \
+            --add-data "images/background.jpeg:images" \
             --hidden-import=PIL \
             --hidden-import=PIL.Image \
             --hidden-import=PIL.ImageTk \
