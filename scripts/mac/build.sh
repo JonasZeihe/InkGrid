@@ -4,6 +4,6 @@
 set -e
 cd "$(dirname "$0")"
 cd ../../
-python scripts/logic/build_app.py
+python3 scripts/logic/build_app.py
 echo "Build done."
 read -n 1 -s

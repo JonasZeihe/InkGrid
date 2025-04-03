@@ -10,7 +10,7 @@ if [ ! -f "venv/bin/activate" ]; then
   exit 1
 fi
 source venv/bin/activate
-python scripts/logic/run_logic.py "$@"
+python3 scripts/logic/run_logic.py "$@"
 echo "Done."
 read -n 1 -s
 deactivate

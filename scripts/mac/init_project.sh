@@ -4,6 +4,6 @@
 set -e
 cd "$(dirname "$0")"
 cd ../../
-python scripts/logic/init_project.py
+python3 scripts/logic/init_project.py
 echo "Press any key to exit..."
 read -n 1 -s
