@@ -1,22 +1,16 @@
-altgraph==0.17.4
 certifi==2025.1.31
 charset-normalizer==3.4.1
-coverage==7.8.0
 docopt==0.6.2
 idna==3.10
 iniconfig==2.1.0
-macholib==1.16.3
 packaging==24.2
-pillow==11.1.0
+pillow==11.2.1
 pipreqs==0.4.13
 pipreqsnb==0.2.4
 pluggy==1.5.0
-pyinstaller==6.12.0
-pyinstaller-hooks-contrib==2025.2
 pytest==8.3.5
 requests==2.32.3
 setuptools==78.1.0
 svgwrite==1.4.3
 urllib3==2.3.0
-wheel @ file:///opt/homebrew/Cellar/python%403.13/3.13.2/libexec/wheel-0.45.1-py3-none-any.whl#sha256=b9235939e2096903717cb6bfc132267f8a7e46deb2ec3ef9c5e234ea301795d0
 yarg==0.1.10
