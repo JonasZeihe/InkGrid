@@ -2,7 +2,7 @@
 # (C) 2025 Jonas Zeihe, MIT License. Developer: Jonas Zeihe. Contact: JonasZeihe@gmail.com
 
 """
-Runs all tests for the InkGrid application with coverage.
+Runs all tests for the application with coverage.
 """
 
 import os
