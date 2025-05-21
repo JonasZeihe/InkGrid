@@ -2,10 +2,10 @@
 
 
 a = Analysis(
-    ['src\\app\\main.py'],
+    ['src/app/main.py'],
     pathex=[],
     binaries=[],
-    datas=[('C:\\dev\\repos\\03_PYTHON\\InkGrid\\images\\background.jpeg', 'images')],
+    datas=[('/Users/jonaszeihemacbookpro/Desktop/dev/InkGrid/images/background.jpeg', 'images')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
