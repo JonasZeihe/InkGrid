@@ -12,6 +12,8 @@
 
 **InkGrid** is a lightweight and flexible tool designed to automate the creation of **structured SVG swatches** from text-based color templates. The resulting SVG files are optimized for modern design systems, providing organized and reusable outputs for developers and designers alike.
 
+> InkGrid also exports JSON-compatible color tokens for seamless integration with Figma via the [InkGrid Tokens Plugin](https://github.com/JonasZeihe/InkGrid-Tokens).
+
 ---
 
 ## **Features**
@@ -21,6 +23,7 @@
 - **Dynamic Grouping**: Organize colors automatically based on your template.
 - **Flexible Templates**: Define structured palettes in an intuitive format.
 - **High-Quality Outputs**: Professional SVG files ready for direct integration.
+- **Figma Integration**: Export JSON color tokens for use with the InkGrid Tokens Plugin.
 
 ---
 
@@ -35,6 +38,8 @@
    cd inkgrid
    ```
 
+````
+
 2. Install dependencies:
 
    ```bash
@@ -42,6 +47,7 @@
    ```
 
 3. Run InkGrid with your template:
+
    ```bash
    python src/main.py templates/sample_colors.txt
    ```
@@ -104,6 +110,7 @@ InkGrid generates a single SVG file containing:
 - **Dual Themes**: Organized sections for light and dark modes.
 - **Grouped Swatches**: Clearly labeled categories based on your template.
 - **Professional Formats**: SVG outputs ready for integration into any design system.
+* **JSON Tokens**: Optional export of Figma-compatible JSON for use with the InkGrid Tokens plugin.
 
 ### **Example Output**
 
@@ -157,6 +164,13 @@ python scripts/logic/extract_codebase.py optional_suffix
 
 ---
 
+## **Figma Plugin Integration**
+
+To directly use exported JSON color tokens in your Figma projects, install the companion plugin:
+
+🔌 **[InkGrid Tokens Plugin](https://github.com/JonasZeihe/InkGrid-Tokens)**
+Convert your InkGrid palettes into native Figma color styles with a single click.
+
 ---
 
 ## **License**
@@ -176,3 +190,4 @@ InkGrid is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file
 ## **Support the Project**
 
 If you find **InkGrid** useful, consider giving it a ⭐ on GitHub. Contributions are also welcome—open an issue or submit a pull request to help improve the project.
+````
