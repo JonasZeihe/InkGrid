@@ -1,6 +1,6 @@
 """
 GUI for InkGrid. Lets the user pick multiple color files and an output folder,
-generates SVGs, and (if logging is enabled) logs events via the shared logger.
+generates SVGs and JSON for the InkGrid-Tokens Figma plugin, and (if logging is enabled) logs events via the shared logger.
 """
 
 import os
@@ -13,6 +13,7 @@ from PIL import Image, ImageTk
 from app.generate import generate_svg_from_groups
 from app.utils import read_color_file
 from app.logger_config import setup_logger
+from app.export import export_json_for_figma
 
 
 def run_app(logging_enabled=False):
@@ -46,15 +47,22 @@ def run_app(logging_enabled=False):
 
     selected_files_var = tk.StringVar(value="No files selected")
     output_folder_var = tk.StringVar(value="No folder selected")
+    json_export_var = tk.BooleanVar(value=True)
 
     _create_file_selection(frame, selected_files_var)
     _create_folder_selection(frame, output_folder_var)
+    _create_json_checkbox(frame, json_export_var)
 
     ttk.Button(
         frame,
         text="Generate SVGs",
         command=lambda: _generate(
-            root, selected_files_var, output_folder_var, logging_enabled, logger
+            root,
+            selected_files_var,
+            output_folder_var,
+            logging_enabled,
+            logger,
+            json_export_var.get(),
         ),
         style="Primary.TButton",
     ).pack(pady=15)
@@ -73,13 +81,12 @@ def _create_file_selection(frame, selected_files_var):
         frame, text="Color Files", padding=10, style="Frame.TLabelframe"
     )
     file_frame.pack(fill="x", padx=10, pady=5)
-    file_label = ttk.Label(
+    ttk.Label(
         file_frame,
         textvariable=selected_files_var,
         wraplength=400,
         style="Label.TLabel",
-    )
-    file_label.pack(side="left", padx=10)
+    ).pack(side="left", padx=10)
     ttk.Button(
         file_frame,
         text="Browse",
@@ -93,10 +100,9 @@ def _create_folder_selection(frame, output_folder_var):
         frame, text="Output Folder", padding=10, style="Frame.TLabelframe"
     )
     folder_frame.pack(fill="x", padx=10, pady=5)
-    folder_label = ttk.Label(
-        folder_frame, textvariable=output_folder_var, style="Label.TLabel"
+    ttk.Label(folder_frame, textvariable=output_folder_var, style="Label.TLabel").pack(
+        side="left", padx=10
     )
-    folder_label.pack(side="left", padx=10)
     ttk.Button(
         folder_frame,
         text="Choose",
@@ -105,18 +111,25 @@ def _create_folder_selection(frame, output_folder_var):
     ).pack(side="right", padx=10)
 
 
-def _generate(root, file_var, folder_var, logging_enabled, logger):
+def _create_json_checkbox(frame, var):
+    ttk.Checkbutton(
+        frame,
+        text="Export JSON for Figma Plugin",
+        variable=var,
+        onvalue=True,
+        offvalue=False,
+    ).pack(pady=5)
+
+
+def _generate(root, file_var, folder_var, logging_enabled, logger, export_json):
     paths = file_var.get().split(";")
     out_dir = folder_var.get()
-
     if "No files selected" in paths:
         logger.warning("No color files selected.")
         messagebox.showwarning("Warning", "No color files selected.")
         return
-
     if out_dir == "No folder selected":
         out_dir = _get_default_output_dir()
-
     os.makedirs(out_dir, exist_ok=True)
     logger.info(f"Output directory set: {out_dir}")
 
@@ -141,9 +154,13 @@ def _generate(root, file_var, folder_var, logging_enabled, logger):
 
         logger.info(f"Generating SVG: {svg_path}")
         generate_svg_from_groups(colors, path, output_file=svg_path)
-        logger.info(f"SVG saved: {svg_path}")
+        logger.info(f"SVG gespeichert: {svg_path}")
 
-    logger.info("All SVGs generated successfully.")
+        if export_json:
+            json_path = export_json_for_figma(colors, path, out_dir)
+            logger.info(f"JSON for Figma exported: {json_path}")
+
+    logger.info("All files generated successfully.")
     messagebox.showinfo("Success", f"SVGs generated at:\n{out_dir}")
     root.destroy()
 
