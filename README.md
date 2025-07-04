@@ -38,8 +38,6 @@
    cd inkgrid
    ```
 
-````
-
 2. Install dependencies:
 
    ```bash
